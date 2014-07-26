@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="biling:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="beling.backend.war">
+      <element id="artifact" artifact-name="biling:war exploded" />
+    </root>
+  </artifact>
+</component>

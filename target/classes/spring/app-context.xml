@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+       xmlns:cxf="http://cxf.apache.org/core"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+              http://www.springframework.org/schema/beans/spring-beans.xsd
+              http://cxf.apache.org/jaxrs
+              http://cxf.apache.org/schemas/jaxrs.xsd
+              http://cxf.apache.org/core
+              http://cxf.apache.org/schemas/core.xsd
+              http://www.springframework.org/schema/context
+              http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+    <!-- do not use import statements if CXFServlet init parameters link to this pojo.xml -->
+    <import resource="classpath:META-INF/cxf/cxf.xml"/>
+    <import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
+    <!--<context:property-placeholder-->
+            <!--location="com/papers/config/test.properties"/>-->
+
+
+    <bean id="jsonProvider" class="org.codehaus.jackson.jaxrs.JacksonJsonProvider"/>
+<!---->
+
+   <!--Papers Services-->
+    <jaxrs:server id="papersServices" address="/">
+
+        <jaxrs:serviceBeans>
+
+            <ref bean="employeeServiceBean"/>
+
+        </jaxrs:serviceBeans>
+        <jaxrs:providers>
+            <ref bean="jsonProvider"/>
+        </jaxrs:providers>
+        <jaxrs:extensionMappings>
+            <entry key="xml" value="application/xml" />
+            <entry key="json" value="application/json" />
+        </jaxrs:extensionMappings>
+        <jaxrs:features>
+            <cxf:logging/>
+        </jaxrs:features>
+
+    </jaxrs:server>
+
+
+    <!--JSON Services-->
+    <bean id="employeeServiceBean" class="com.bilingual.services.EmployeeService"/>
+
+</beans>
